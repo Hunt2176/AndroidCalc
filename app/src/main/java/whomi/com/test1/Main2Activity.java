@@ -360,6 +360,7 @@ public class Main2Activity extends AppCompatActivity {
 
 
 
+
     void storeHistory(HistoryItem history){
 
         SharedPreferences historyCheck = getSharedPreferences("HISTORY_COUNT",0);
