@@ -24,6 +24,7 @@ public class Main2Activity extends AppCompatActivity {
     private TextView textView;
     private Button buttonBackspace;
     private Button buttonEqual;
+    private String[] ops = {"x","/","+","-"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -206,8 +207,19 @@ public class Main2Activity extends AppCompatActivity {
 
     void UpdateView(String append){
         String flyUpdate="";
+        boolean appendIsOp = false;
+        for (String i : ops){
+            System.out.print(i + " " + append);
+            if (i.equals(append)){
+                appendIsOp = true;
+                System.out.print(" = true");
+
+            }
+            System.out.print("\n");
+        }
+
         if (!append.isEmpty()) {
-            ChangeOutput(append);
+            ChangeOutput(append,appendIsOp);
         }
         if (Character.isDigit(this.text.charAt(this.text.length()-1))){
             this.lastCharDigit = true;
@@ -250,7 +262,7 @@ public class Main2Activity extends AppCompatActivity {
     }
 
 
-    void ChangeOutput(String append){
+    void ChangeOutput(String append,boolean appendIsOp){
         if (append.equals("CLEAR")){
             UpdateTextView("0");
             return;
@@ -294,6 +306,12 @@ public class Main2Activity extends AppCompatActivity {
 
         if (!GetTextView().equals("0")) {
             UpdateTextView(GetTextView() + append);
+        }
+        else if (appendIsOp && this.lastCharDigit){
+            UpdateTextView(append);
+        }
+        else if (appendIsOp && !this.lastCharDigit){
+            return;
         }
         else {
             UpdateTextView(append);
