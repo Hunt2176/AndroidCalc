@@ -208,14 +208,11 @@ public class Main2Activity extends AppCompatActivity {
     void UpdateView(String append){
         String flyUpdate="";
         boolean appendIsOp = false;
+
         for (String i : ops){
-            System.out.print(i + " " + append);
             if (i.equals(append)){
                 appendIsOp = true;
-                System.out.print(" = true");
-
             }
-            System.out.print("\n");
         }
 
         if (!append.isEmpty()) {
@@ -263,6 +260,7 @@ public class Main2Activity extends AppCompatActivity {
 
 
     void ChangeOutput(String append,boolean appendIsOp){
+
         if (append.equals("CLEAR")){
             UpdateTextView("0");
             return;
@@ -304,17 +302,17 @@ public class Main2Activity extends AppCompatActivity {
             return;
         }
 
-        if (!GetTextView().equals("0")) {
-            UpdateTextView(GetTextView() + append);
+        if (GetTextView().equals("0") && !appendIsOp) {
+            UpdateTextView(append);
         }
         else if (appendIsOp && this.lastCharDigit){
-            UpdateTextView(append);
+            UpdateTextView(GetTextView() + append);
         }
         else if (appendIsOp && !this.lastCharDigit){
             return;
         }
         else {
-            UpdateTextView(append);
+            UpdateTextView(GetTextView() + append);
         }
     }
 
