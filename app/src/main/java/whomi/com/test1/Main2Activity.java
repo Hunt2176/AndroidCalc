@@ -2,6 +2,7 @@ package whomi.com.test1;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -16,13 +17,13 @@ import java.util.ArrayList;
 
 public class Main2Activity extends AppCompatActivity {
 
+    static ArrayList<HistoryItem> history;
     private String text = "0";
     private TextView OnFlyView;
     private boolean lastCharDigit;
     private TextView textView;
     private Button buttonBackspace;
     private Button buttonEqual;
-    static ArrayList<HistoryItem> history;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,7 @@ public class Main2Activity extends AppCompatActivity {
 
         final Intent History = new Intent(this, History.class);
 
-        this.history = new ArrayList<>();
+        history = new ArrayList<>();
 
         getHistory();
         Button buttonDecimal = (Button) findViewById(R.id.buttonDecimal);
@@ -204,16 +205,11 @@ public class Main2Activity extends AppCompatActivity {
     }
 
     void UpdateView(String append){
-
+        String flyUpdate="";
         if (!append.isEmpty()) {
             ChangeOutput(append);
         }
-        if (this.text.length()>1 && Character.isDigit(this.text.charAt(this.text.length() - 1))) {
-                this.lastCharDigit = true;
-            }
-        else {
-            this.lastCharDigit = false;
-            }
+        this.lastCharDigit = this.text.length() > 1 && Character.isDigit(this.text.charAt(this.text.length() - 1));
 
 
         if (this.text.equals("0")){
@@ -225,11 +221,21 @@ public class Main2Activity extends AppCompatActivity {
 
 
         if (this.lastCharDigit){
-            String flyUpdate = Calculate().getNumber()+ "";
+
+            if (TestforDecimalNeed(Calculate().getNumber())){
+                String resultToSplice = Calculate().getNumber().toString();
+                flyUpdate = resultToSplice.substring(0,resultToSplice.length()-2);
+            }
+            else {
+                flyUpdate = Calculate().getNumber()+ "";
+            }
+
             this.OnFlyView.setText(flyUpdate);
             this.buttonEqual.setEnabled(true);
         }
         if (this.text.equals("0")){
+            flyUpdate="0";
+            this.OnFlyView.setText(flyUpdate);
             this.buttonEqual.setEnabled(false);
         }
         if (!lastCharDigit){
@@ -259,12 +265,17 @@ public class Main2Activity extends AppCompatActivity {
             return;
         }
 
-
-
         if (append.equals("EQUALS") && getLastCharStatus()){
             Double result = Calculate().getNumber();
             AddToHistory(new HistoryItem(GetTextView(),result),false);
-            UpdateTextView(result+"");
+
+            if (TestforDecimalNeed(result)){
+                String resultToSplice = result.toString();
+                UpdateTextView(resultToSplice.substring(0,resultToSplice.length()-2)+"");
+            }
+            else {
+                UpdateTextView(result + "");
+            }
             return;
         }
         if (GetTextView().length()==15){
@@ -323,11 +334,27 @@ public class Main2Activity extends AppCompatActivity {
     }
 
     void AddToHistory(HistoryItem NewHistoryItem,boolean fromMemory){
-        this.history.add(0,NewHistoryItem);
+        history.add(0,NewHistoryItem);
         if (!fromMemory){
             storeHistory(NewHistoryItem);
         }
     }
+
+
+    Boolean TestforDecimalNeed(Double testNumber){
+        String testSplice = testNumber+"";
+        System.out.println("TESTSPLICE " + testSplice.substring(testSplice.length()-2,testSplice.length()));
+        if (testSplice.substring(testSplice.length()-2,testSplice.length()).equals(".0")){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
+
+
 
     void storeHistory(HistoryItem history){
 

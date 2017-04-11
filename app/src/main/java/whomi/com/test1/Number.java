@@ -70,19 +70,13 @@ public class Number {
 	}
 	
 	boolean isNegative(){
-		if (this.Number < 0){
-			return true;
-		}
-		return false;
-	}
+        return this.Number < 0;
+    }
 	
 	
 	boolean isExp(){
-		if (isNumber == false){
-			return true;
-		}
-		return false;
-	}
+        return isNumber == false;
+    }
 	
 	Double performOp(Number num1,Number num2){
 		if (exp == '*'){
