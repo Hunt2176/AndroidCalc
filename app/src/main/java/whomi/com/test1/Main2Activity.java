@@ -2,6 +2,9 @@ package whomi.com.test1;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.design.widget.TabItem;
+import android.support.design.widget.TabLayout;
+import android.support.transition.TransitionManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -34,6 +37,7 @@ public class Main2Activity extends AppCompatActivity {
         history = new ArrayList<>();
 
         getHistory();
+
         Button buttonDecimal = (Button) findViewById(R.id.buttonDecimal);
         Button button0 = (Button) findViewById(R.id.button0);
         Button button1 = (Button) findViewById(R.id.button1);
@@ -353,8 +357,6 @@ public class Main2Activity extends AppCompatActivity {
             return false;
         }
     }
-
-
 
 
 
