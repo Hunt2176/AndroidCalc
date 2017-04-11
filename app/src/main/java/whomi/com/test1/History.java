@@ -27,7 +27,6 @@ public class History extends AppCompatActivity {
             public void onClick(View v) {
                 Main2Activity.history.clear();
                 reload();
-
             }
         });
 
