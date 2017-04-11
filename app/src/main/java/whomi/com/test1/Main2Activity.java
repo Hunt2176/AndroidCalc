@@ -209,7 +209,12 @@ public class Main2Activity extends AppCompatActivity {
         if (!append.isEmpty()) {
             ChangeOutput(append);
         }
-        this.lastCharDigit = this.text.length() > 1 && Character.isDigit(this.text.charAt(this.text.length() - 1));
+        if (Character.isDigit(this.text.charAt(this.text.length()-1))){
+            this.lastCharDigit = true;
+        }
+        else {
+            this.lastCharDigit = false;
+        }
 
 
         if (this.text.equals("0")){
