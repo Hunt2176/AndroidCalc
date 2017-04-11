@@ -178,42 +178,22 @@ public class Main2Activity extends AppCompatActivity {
                 startActivity(History);
             }
         });
-        textView.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                UpdateTextView(textView.getText().toString());
-//                UpdateView("");
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });{
-
-        }
-
 
         UpdateView("");
     }
+
 
     void UpdateView(String append){
         String flyUpdate="";
         boolean appendIsOp = false;
 
-        for (String i : ops){
+        if (!append.isEmpty()) {
+
+            for (String i : ops){
             if (i.equals(append)){
                 appendIsOp = true;
             }
         }
-
-        if (!append.isEmpty()) {
             ChangeOutput(append,appendIsOp);
         }
         if (Character.isDigit(this.text.charAt(this.text.length()-1))){
@@ -231,6 +211,9 @@ public class Main2Activity extends AppCompatActivity {
             this.buttonBackspace.setEnabled(true);
         }
 
+        if (GetTextView().equals("Infinity")){
+            this.OnFlyView.setText("wut");
+        }
 
         if (this.lastCharDigit){
 
@@ -300,7 +283,7 @@ public class Main2Activity extends AppCompatActivity {
             return;
         }
 
-        if (GetTextView().equals("0") && !appendIsOp) {
+        if ((GetTextView().equals("0") && !appendIsOp) || (appendIsOp && append.equals("-") && GetTextView().equals("0"))) {
             UpdateTextView(append);
         }
         else if (appendIsOp && this.lastCharDigit){
