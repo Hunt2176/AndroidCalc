@@ -17,8 +17,8 @@ import java.util.ArrayList;
 public class Main2Activity extends AppCompatActivity {
 
     private String text = "0";
-    static public TextView OnFlyView;
-    static boolean lastCharDigit;
+    private TextView OnFlyView;
+    private boolean lastCharDigit;
     private TextView textView;
     private Button buttonBackspace;
     private Button buttonEqual;
@@ -64,8 +64,8 @@ public class Main2Activity extends AppCompatActivity {
         this.textView.setInputType(InputType.TYPE_NULL);
         this.textView.setTextIsSelectable(true);
 
-        TextView OnFlyView = (TextView) findViewById(R.id.OnFly);
-        this.OnFlyView = OnFlyView;
+        this.OnFlyView = (TextView) findViewById(R.id.OnFly);
+
         textView.setText(this.text);
 
         button0.setOnClickListener(new View.OnClickListener() {
@@ -208,13 +208,13 @@ public class Main2Activity extends AppCompatActivity {
         if (!append.isEmpty()) {
             ChangeOutput(append);
         }
-        if (this.text.length()>1) {
-            if (Character.isDigit(this.text.charAt(this.text.length() - 1))) {
+        if (this.text.length()>1 && Character.isDigit(this.text.charAt(this.text.length() - 1))) {
                 this.lastCharDigit = true;
-            } else {
-                this.lastCharDigit = false;
             }
-        }
+        else {
+            this.lastCharDigit = false;
+            }
+
 
         if (this.text.equals("0")){
             this.buttonBackspace.setEnabled(false);
@@ -225,7 +225,8 @@ public class Main2Activity extends AppCompatActivity {
 
 
         if (this.lastCharDigit){
-            this.OnFlyView.setText(Calculate().getNumber()+ "");
+            String flyUpdate = Calculate().getNumber()+ "";
+            this.OnFlyView.setText(flyUpdate);
             this.buttonEqual.setEnabled(true);
         }
         if (this.text.equals("0")){
