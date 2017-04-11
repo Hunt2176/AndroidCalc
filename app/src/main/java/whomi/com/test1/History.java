@@ -57,7 +57,7 @@ public class History extends AppCompatActivity {
         SharedPreferences.Editor editor = historyCheck.edit();
 
         editor.putInt("COUNT",0);
-        editor.commit();
+        editor.apply();
 
         Intent intent = new Intent(this,History.class);
         startActivity(intent);

@@ -340,11 +340,11 @@ public class Main2Activity extends AppCompatActivity {
         SharedPreferences.Editor countEditor = historyCheck.edit();
 
         editor.putString(currentCount+"",history.getContent());
-        editor.commit();
+        editor.apply();
 
 
         countEditor.putInt("COUNT",currentCount);
-        countEditor.commit();
+        countEditor.apply();
 
 
 
