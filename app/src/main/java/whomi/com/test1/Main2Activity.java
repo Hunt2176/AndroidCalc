@@ -38,6 +38,7 @@ public class Main2Activity extends AppCompatActivity {
 
         history = new ArrayList<>();
 
+
         getHistory();
 
 
