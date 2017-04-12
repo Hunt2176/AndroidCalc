@@ -2,7 +2,9 @@ package whomi.com.test1;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.annotation.Nullable;
+import android.support.design.widget.TabItem;
+import android.support.design.widget.TabLayout;
+import android.support.transition.TransitionManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -11,7 +13,6 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -35,7 +36,9 @@ public class Main2Activity extends AppCompatActivity {
 
         history = new ArrayList<>();
 
+
         getHistory();
+
         Button buttonDecimal = (Button) findViewById(R.id.buttonDecimal);
         Button button0 = (Button) findViewById(R.id.button0);
         Button button1 = (Button) findViewById(R.id.button1);
@@ -180,42 +183,22 @@ public class Main2Activity extends AppCompatActivity {
                 startActivity(History);
             }
         });
-        textView.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                UpdateTextView(textView.getText().toString());
-//                UpdateView("");
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });{
-
-        }
-
 
         UpdateView("");
     }
+
 
     void UpdateView(String append){
         String flyUpdate="";
         boolean appendIsOp = false;
 
-        for (String i : ops){
+        if (!append.isEmpty()) {
+
+            for (String i : ops){
             if (i.equals(append)){
                 appendIsOp = true;
             }
         }
-
-        if (!append.isEmpty()) {
             ChangeOutput(append,appendIsOp);
         }
         if (Character.isDigit(this.text.charAt(this.text.length()-1))){
@@ -233,6 +216,9 @@ public class Main2Activity extends AppCompatActivity {
             this.buttonBackspace.setEnabled(true);
         }
 
+        if (GetTextView().equals("Infinity")){
+            this.OnFlyView.setText("wut");
+        }
 
         if (this.lastCharDigit){
 
@@ -293,7 +279,7 @@ public class Main2Activity extends AppCompatActivity {
             }
             return;
         }
-        if (GetTextView().length()==15){
+        if (GetTextView().length()>=15){
             return;
         }
 
@@ -302,7 +288,7 @@ public class Main2Activity extends AppCompatActivity {
             return;
         }
 
-        if (GetTextView().equals("0") && !appendIsOp) {
+        if ((GetTextView().equals("0") && !appendIsOp) || (appendIsOp && append.equals("-") && GetTextView().equals("0"))) {
             UpdateTextView(append);
         }
         else if (appendIsOp && this.lastCharDigit){
@@ -372,7 +358,6 @@ public class Main2Activity extends AppCompatActivity {
             return false;
         }
     }
-
 
 
 
