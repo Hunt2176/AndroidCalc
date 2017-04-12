@@ -75,8 +75,4 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="title_activity_main3">Main3Activity</string>
-    <string name="title_activity_calc_main">CalcMain</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
 </resources>
