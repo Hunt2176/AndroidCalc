@@ -31,7 +31,8 @@
         </activity>
         <activity
             android:name=".History"
-            android:label="History" />
+            android:label="History"
+            android:parentActivityName=".Main2Activity"/>
     </application>
 
 </manifest>

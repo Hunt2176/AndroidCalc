@@ -12,6 +12,7 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class Main2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
 
         final Intent History = new Intent(this, History.class);
+        final Intent Settings = new Intent(this,settings.class);
 
         history = new ArrayList<>();
 
@@ -49,14 +51,14 @@ public class Main2Activity extends AppCompatActivity {
         Button button7 = (Button) findViewById(R.id.button7);
         Button button8 = (Button) findViewById(R.id.button8);
         Button button9 = (Button) findViewById(R.id.button9);
-        Button buttonClear = (Button) findViewById(R.id.buttonClearH);
         Button buttonAdd = (Button) findViewById(R.id.buttonAdd);
         Button buttonSub = (Button) findViewById(R.id.buttonSub);
         Button buttonMul = (Button) findViewById(R.id.buttonMul);
         Button buttonDiv = (Button) findViewById(R.id.buttonDiv);
         Button buttonEqual = (Button) findViewById(R.id.buttonEqual);
         Button buttonBackspace = (Button) findViewById(R.id.buttonBackspace);
-        Button buttonHistory = (Button) findViewById(R.id.buttonHistory);
+        ImageButton settingsButton = (ImageButton) findViewById(R.id.settingsButton);
+        ImageButton historyButton = (ImageButton) findViewById(R.id.historyButton);
         final TextView textView = (TextView) findViewById(R.id.testfield);
         this.textView = textView;
 
@@ -72,6 +74,26 @@ public class Main2Activity extends AppCompatActivity {
 
         textView.setText(this.text);
 
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(Settings);
+            }
+        });
+        historyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(History);
+            }
+        });
+
+        buttonBackspace.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                UpdateView("CLEAR");
+                return true;
+            }
+        });
         button0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -132,11 +154,6 @@ public class Main2Activity extends AppCompatActivity {
                 UpdateView("9");
             }
         });
-        buttonClear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {UpdateView("CLEAR");
-            }
-        });
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -176,12 +193,7 @@ public class Main2Activity extends AppCompatActivity {
             public void onClick(View view) {UpdateView(".");
             }
         });
-        buttonHistory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(History);
-            }
-        });
+
 
         UpdateView("");
     }
