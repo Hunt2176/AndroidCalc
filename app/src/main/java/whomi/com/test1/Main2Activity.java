@@ -2,14 +2,9 @@ package whomi.com.test1;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.design.widget.TabItem;
-import android.support.design.widget.TabLayout;
-import android.support.transition.TransitionManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.InputType;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -290,7 +285,7 @@ public class Main2Activity extends AppCompatActivity {
             }
             return;
         }
-        if (GetTextView().length()>=15){
+        if (GetTextView().length()>=10){
             return;
         }
 

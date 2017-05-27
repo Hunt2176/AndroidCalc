@@ -291,7 +291,7 @@
 
     <EditText
         android:id="@+id/testfield"
-        android:layout_width="276dp"
+        android:layout_width="277dp"
         android:layout_height="63dp"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
@@ -306,7 +306,8 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="@+id/button7"
         app:layout_constraintRight_toRightOf="@+id/button9"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="69dp" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar2"
